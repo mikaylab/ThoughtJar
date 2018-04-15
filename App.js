@@ -67,19 +67,31 @@ class MyJar extends Component {
       </TouchableOpacity>
         <Text style = {styles.date}>April 14, 2018</Text>
         </View>
+
+        <TextInput
+            style={{height: 50,
+                    margin: 20,
+                    padding: 10,
+                    fontFamily: 'American Typewriter',
+                    fontSize: 25,
+            }}
+            placeholder="Enter your response"
+            onChangeText={(text) => {this.setState(() => {
+              return {
+                typedResponse: text
+              };
+            })}}
+            />
       </View>
     );
   }
 }
 class Questions extends Component {
-  JumpToMyJar = () =>
+  Responses = () =>
   {
-    this.props.navigation.navigate("Second");
+    this.props.navigation.navigate("Responses");
   }
-  JumpToQuestions = () =>
-  {
-    this.props.navigation.navigate("Questions");
-  }
+
   render()
   {
     var questionDatabase = ["How will you conquer today?",
