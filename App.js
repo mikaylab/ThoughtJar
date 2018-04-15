@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
-import { AppRegistry, StyleSheet, Text ,
-  View, Switch, TouchableOpacity, Button,
-   Image, TextInput, Alert} from 'react-native';
+import {AppRegistry, StyleSheet, Text, View, Switch, TouchableOpacity, Button, Image, TextInput, Alert} from 'react-native';
 import {List, ListItem} from 'react-native-elements';
 import {StackNavigator} from 'react-navigation';
 import {YellowBox} from 'react-native';
@@ -69,7 +67,7 @@ class MyJar extends Component {
         style={{width: 267.75, height: 450}}
         source={require("./assets/ThoughtJar.png")}/>
       </TouchableOpacity>
-        <Text style = {styles.date}>{Moment(now).format('dddd, MMMM Do, YYYY')}</Text>
+        <Text style = {styles.date}>{Moment(now).format('dddd, MMMM Do')}</Text>
         </View>
       </View>
     );
@@ -106,7 +104,14 @@ class Questions extends Component {
     "What's a skill you haven't used recently?",
     "Can you think of a time you overcame something stressful?",
     "What advice would you give your younger self?",
-    ""];
+    "What are and how do we fix the effects of material and noise pollution on marine life?",
+    "Are there libraries but for new technology for free public access and should that exist?",
+    "How do you engage with your community?",
+    "How does your place of work or study promote cultural diversity and inclusivity?",
+    "What does quality education mean to you?",
+    "Do popular product or service ads perpetuate stereotypes?",
+    "Are all stereotypes inherently negative?",
+    "Can you identify any internal biases that you would like to change?"];
     var i = Math.floor(Math.random() * (questionDatabase.length-1));
 
     return(
@@ -154,7 +159,7 @@ class Responses extends Component {
 
   render() {
     return (
-      <View style = {styles.container }>
+      <View style = {styles.ResponseContainer}>
         <TextInput multiline
             style={styles.responsesInput}
             placeholder="Enter your response"
@@ -193,20 +198,22 @@ class SettingsPage extends Component {
     {
 
     //Perform any task here which you want to execute on Switch ON event.
-    Alert.alert("You will recieve Daily Thoughts.");
+    Alert.alert("You will receive Daily Thoughts.");
   }
   else{
     //Perform any task here which you want to execute on Switch OFF event.
-    Alert.alert("You will not recieve Daily Thoughts.");
+    Alert.alert("You will not receive Daily Thoughts.");
   }
-
+}
   render() {
 
    return (
 
-     <View style={styles.HomeContainer}>
+     <View style={styles.SettingsContainer}>
 
-       <Text style = {styles.welcome}>Do you want to get Daily Thoughts?</Text>
+       <Text style = {{fontFamily: 'American Typewriter', padding: 10, fontSize: 25}}>
+          Do you want to get Daily Thoughts?
+       </Text>
         <Switch
           onValueChange={(value) => this.ShowAlert(value)}
           value={this.state.SwitchOnValueHolder} />
@@ -242,6 +249,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  SettingsContainer: {
+    flex: 1,
+    backgroundColor: '#EEECFF',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  ResponseContainer: {
+    flex: 1,
+    backgroundColor: '#FFFFCC',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   button: {
     backgroundColor: '#fff',
     borderRadius: 20,
@@ -256,6 +275,7 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontFamily: 'American Typewriter',
     padding: 10,
+    paddingBottom: 140
   },
   qstyle: {
     flex: 1,
