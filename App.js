@@ -10,10 +10,6 @@ YellowBox.ignoreWarnings(['Warning: component']);
 
 //export default class App extends React.Component {
 class HomePage extends Component {
-  static navigationOptions =
-  {
-      title: "Home",
-  };
   OpenMyJar = () =>
   {
     this.props.navigation.navigate("Second");
@@ -39,7 +35,12 @@ class HomePage extends Component {
 class MyJar extends Component {
   static navigationOptions =
   {
-      title: "My Jar",
+      headerTitle: (
+        <Image
+          source={require("./assets/home_icon.png")}
+          style={{width: 32, height: 32}}
+        />
+      ),
   };
   OpenSettings = () =>
   {
@@ -87,6 +88,14 @@ class MyJar extends Component {
   }
 }
 class Questions extends Component {
+  GoBack = () =>
+  {
+    this.props.navigation.goBack(null);
+  }
+  OpenMyJar = () =>
+  {
+    this.props.navigation.navigate("Second");
+  }
   Responses = () =>
   {
     this.props.navigation.navigate("Responses");
@@ -108,22 +117,14 @@ class Questions extends Component {
     ""];
     var i = Math.floor(Math.random() * (questionDatabase.length-1));
 
-
     return(
      <View style = {styles.container}>
-     <TouchableOpacity
-         style={styles.button}
-         onPress={this.JumpToQuestions}>
-         <Image
-         style={{width: 29.75, height: 50}}
-         source={require("./assets/ThoughtJar.png")}/>
-       </TouchableOpacity>
       <Text style = {styles.qstyle}>{questionDatabase[i]}</Text>
       <TouchableOpacity
           style={styles.button}
-          onPress={this.JumpToMyJar}>
+          onPress={this.GoBack}>
           <Image
-          style={{width: 32, height: 32, bottom: 0}}
+          style={{width: 32, height: 32}}
           source={require("./assets/home_icon.png")}/>
         </TouchableOpacity>
       </View>
@@ -157,7 +158,7 @@ class SettingsPage extends Component {
   }
   else{
     //Perform any task here which you want to execute on Switch OFF event.
-    Alert.alert("You not recieve Daily Thoughts.");
+    Alert.alert("You will not recieve Daily Thoughts.");
   }
 
 }
