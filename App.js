@@ -92,11 +92,11 @@ class SettingsPage extends Component {
 
      <View style={styles.container}>
 
-       <Text style ={{fontSize: 18}}>Settings</Text>
+       <Text style ={{fontSize: 18}}>Settings!!!</Text>
 
         <Switch
           onValueChange={(value) => this.ShowAlert(value)}
-          style={{marginBottom: 10}}
+          style= {{paddingBottom:50}}
           value={this.state.SwitchOnValueHolder} />
 
      </View>
