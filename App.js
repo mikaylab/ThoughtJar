@@ -28,31 +28,33 @@ class HomePage extends Component {
       </View>
     );
   }
-
-
 }
 class MyJar extends Component {
   static navigationOptions =
   {
       title: "My Jar",
   };
-  FunctionToOpenSecondActivity = () =>
+  OpenSettings = () =>
   {
     this.props.navigation.navigate("Settings");
+  }
+  JumpToQuestions = () =>
+  {
+    this.props.navigation.navigate("Questions");
   }
   render()
   {
     return(
 
       <View style = {styles.container }>
-      <TouchableOpacity style={styles.button} onPress={()=>{alert("you clicked me")}}>
+      <TouchableOpacity style={styles.button} onPress={this.JumpToQuestions} >
         <Image
         style={{width: 267.75, height: 450}}
         source={require("./assets/ThoughtJar.png")}/>
       </TouchableOpacity>
         <Text style = {styles.date}>April 14, 2018</Text>
         <Text> This is the Jar Page </Text>
-        <Button onPress = {this.FunctionToOpenSecondActivity} title = 'Click Here'/>
+        <Button onPress = {this.OpenSettings} title = 'Click Here'/>
 
       </View>
     );
@@ -136,7 +138,8 @@ export default JarProject = StackNavigator(
 {
     First: { screen: HomePage },
     Second: { screen: MyJar },
-    Settings: { screen: SettingsPage}
+    Settings: { screen: SettingsPage },
+    Questions: { screen: Questions }
   }
 );
 
