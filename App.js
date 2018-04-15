@@ -9,6 +9,12 @@ YellowBox.ignoreWarnings(['Warning: component']);
 
 //export default class App extends React.Component {
 class HomePage extends Component {
+    static navigationOptions =
+  {
+      title: "HomePage",
+      // headerLeft: null
+      header: null
+  };
   OpenMyJar = () =>
   {
     this.props.navigation.navigate("Second");
@@ -40,6 +46,8 @@ class MyJar extends Component {
           style={{width: 32, height: 32}}
         />
       ),
+      // headerLeft: null
+      header: null
   };
   OpenSettings = () =>
   {
@@ -74,6 +82,12 @@ class MyJar extends Component {
   }
 }
 class Questions extends Component {
+ static navigationOptions =
+  {
+      title: "Questions",
+      // headerLeft: null
+      header: null
+  };
   GoBack = () =>
   {
     this.props.navigation.goBack(null);
@@ -151,6 +165,8 @@ class Responses extends Component {
   static navigationOptions =
   {
       title: "Responses",
+      // headerLeft: null
+      header: null
   };
 
   handleChangeText = (typedText) => {
@@ -181,10 +197,16 @@ class SettingsPage extends Component {
       SwitchOnValue : false
     }
   }
+    GoBack = () =>
+  {
+    this.props.navigation.goBack(null);
+  }
 
   static navigationOptions =
   {
       title: "Settings",
+      // headerLeft: null
+      header: null
   };
 
   ShowAlert = (value) =>
@@ -210,13 +232,23 @@ class SettingsPage extends Component {
    return (
 
      <View style={styles.SettingsContainer}>
+       <TouchableOpacity
+          style={styles.button}
+          onPress={this.GoBack}>
+          <Image
+          style={{width: 32, height: 32, left: 302, top: 5, flex: 0}}
+          // style = {{width: 32, height: 32, padding: 25, top: 25}}
+          source={require("./assets/home_icon.png")}/>
+        </TouchableOpacity>
 
+        <View style={styles.InnerSettingsContainer}>
        <Text style = {{fontFamily: 'American Typewriter', padding: 10, fontSize: 25}}>
           Do you want to get Daily Thoughts?
        </Text>
         <Switch
           onValueChange={(value) => this.ShowAlert(value)}
           value={this.state.SwitchOnValueHolder} />
+        </View>
 
      </View>
    );
@@ -252,8 +284,14 @@ const styles = StyleSheet.create({
   SettingsContainer: {
     flex: 1,
     backgroundColor: '#EEECFF',
+    // alignItems: 'center',
+    // justifyContent: 'center',
+  },
+  InnerSettingsContainer: {
+    flex: 1,
+    backgroundColor: '#EEECFF',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   ResponseContainer: {
     flex: 1,
@@ -284,7 +322,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     textAlign: 'center',
     fontSize: 35,
-    paddingTop: 30
+    paddingTop: 70
   },
   date: {
     fontFamily: 'American Typewriter',
