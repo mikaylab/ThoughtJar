@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { AppRegistry, StyleSheet, Text ,View, FlatList, Button} from 'react-native';
+import { AppRegistry, StyleSheet, Text ,View, FlatList, Button, Image} from 'react-native';
 import {List, ListItem} from 'react-native-elements';
 import {StackNavigator} from 'react-navigation';
 import {YellowBox} from 'react-native';
@@ -16,7 +16,12 @@ class HomePage extends Component {
   {
     return (
       <View style={styles.container}>
-        <Text>Thought Jar</Text>
+         <Image
+           style={{width: 119, height: 200}}
+          source={require('./assets/ThoughtJar.png')}
+        />
+
+        <Text style = {styles.welcome}>Thought Jar</Text>
         <Button onPress = {this.OpenMyJar} title = "Go to My Jar" />
       </View>
     );
@@ -52,9 +57,14 @@ export default JarProject = StackNavigator(
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#EDED8A',
+    backgroundColor: '#EDEDD1',
     alignItems: 'center',
     justifyContent: 'center',
     paddingTop: 40,
   },
+  welcome: {
+    fontSize: 25,
+    fontFamily: 'American Typewriter',
+    padding: 10,
+  }
 });
