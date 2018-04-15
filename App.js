@@ -44,10 +44,7 @@ class MyJar extends Component {
     this.props.navigation.navigate("Questions");
   }
 
-  Responses = () =>
-  {
-    this.props.navigation.navigate("Responses");
-  }
+
 
   render()
   {
@@ -72,20 +69,22 @@ class MyJar extends Component {
 class Responses extends Component {
   
   constructor(props) {
-  super(props);
-  this.state = {
-    text: ""
+    super(props);
+    this.state = {
+      text: ""
+    }
   }
-}
 
 handleChangeText = (typedText) => {
   this.setState({text: typedText});
 }
 
 render() {
+      var moment = require('moment');
+    var now = moment();
     return (
       <View style={styles.container}>
-        <Text style = {styles.date}>April 14, 2018</Text>
+        <Text style = {styles.date}>{Moment(now).format('dddd, MMMM Do, YYYY')}</Text>
 
         <TextInput
             style={{height: 50,
@@ -107,6 +106,10 @@ render() {
 }
 
 class Questions extends Component {
+  Responses = () =>
+  {
+    this.props.navigation.navigate("Responses");
+  }
 
   render()
   {
