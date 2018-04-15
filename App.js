@@ -46,16 +46,20 @@ class MyJar extends Component {
   {
     return(
 
-      <View style = {styles.container }>
+      <View style = {styles.jar_screen }>
+      <TouchableOpacity style={styles.button} onPress= {this.OpenSettings} >
+        <Image
+          style={{width: 32, height: 32, left: 327}}
+          source={require("./assets/settings_gear.png")}/>
+       </TouchableOpacity>
+       <View style = {styles.container}>
       <TouchableOpacity style={styles.button} onPress={this.JumpToQuestions} >
         <Image
         style={{width: 267.75, height: 450}}
         source={require("./assets/ThoughtJar.png")}/>
       </TouchableOpacity>
         <Text style = {styles.date}>April 14, 2018</Text>
-        <Text> This is the Jar Page </Text>
-        <Button onPress = {this.OpenSettings} title = 'Click Here'/>
-
+        </View>
       </View>
     );
   }
@@ -121,7 +125,7 @@ class SettingsPage extends Component {
 
    return (
 
-     <View style={styles.container}>
+     <View style={styles.jar_screen}>
 
        <Text style ={{fontSize: 18}}>Settings!!!</Text>
 
@@ -149,8 +153,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingTop: 40,
   },
+   jar_screen: {
+     flex: 1,
+     backgroundColor: '#fff',
+   },
   HomeContainer: {
     flex: 1,
     backgroundColor: '#EDEDD1',
