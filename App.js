@@ -66,7 +66,7 @@ class MyJar extends Component {
       <View style = {styles.jar_screen }>
       <TouchableOpacity style={styles.button} onPress= {this.OpenSettings} >
         <Image
-          style={{width: 32, height: 32, left: 327}}
+          style={{width: 32, height: 32, left: 312, top: 5}}
           source={require("./assets/settings_gear.png")}/>
        </TouchableOpacity>
        <View style = {styles.container}>
