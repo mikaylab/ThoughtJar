@@ -42,6 +42,12 @@ class MyJar extends Component {
   {
     this.props.navigation.navigate("Questions");
   }
+
+  Responses = () =>
+  {
+    this.props.navigation.navigate("Responses");
+  }
+
   render()
   {
     return(
@@ -60,6 +66,44 @@ class MyJar extends Component {
     );
   }
 }
+
+class Responses extends Component {
+  
+  constructor(props) {
+  super(props);
+  this.state = {
+    text: ""
+  }
+}
+
+handleChangeText = (typedText) => {
+  this.setState({text: typedText});
+}
+
+render() {
+    return (
+      <View style={styles.container}>
+        <Text style = {styles.date}>April 14, 2018</Text>
+
+        <TextInput
+            style={{height: 50,
+                    margin: 20,
+                    padding: 10,
+                    fontFamily: 'American Typewriter',
+                    fontSize: 25,
+            }}
+            placeholder="Enter your response"
+            onChangeText={(text) => {this.setState(() => {
+              return {
+                typedResponse: text
+              };
+            })}}
+            />
+      </View>
+    );
+  }
+}
+
 class Questions extends Component {
 
   render()
@@ -70,11 +114,36 @@ class Questions extends Component {
     "What is one thing you do that makes you feel happy?",
     "When's the last time you drank water?",
     "When's the last time you took a walk?",
-    "Take an opportunity to sing your favorite song today!",
+    "What is one small thing you can do to help the environment today?",
+    "What are you grateful for in this moment?",
+    "In what way(s) have you surprised yourself over the past couple months?",
+    "What is one way you could treat yourself today?",
+    "Do you need to remind youself of anything today?",
+    "What is one sentence you would like to tell yourself in 2 months?",
+    "How has society shaped the way I view gender representation is STEM?",
+    "Why do you post photos on Instagram?",
+    "How do the businesses you suppoer impact society?",
     "How can you brighten someone's day today?",
     "What's a skill you haven't used recently?",
     "Can you think of a time you overcame something stressful?",
     "What advice would you give your younger self?",
+    "What do you value in fulfilling relationships?",
+    "How do you foster curiosity in yourself or others?",
+    "Do you give yourself space to challenge your beliefs?",
+    "How can you expose yourself to others who are different than you?",
+    "When was the last time you did something just to learn something new?",
+    "Have you read a non-fiction book in a while?",
+    "What is your opinion on a controversial current event?",
+    "Where are some places you can engage in cross-cultural dialogue?",
+    "If the sole of your shoe could be any surface, what would you choose?",
+    "If rain could feel like anything what would you choose?",
+    "What is one sound you are hearing right now?",
+    "What is one group you could help empower?",
+    "How can we change the face of influence in society?",
+    "How would your life been different if you were born in another country?",
+    "How aware are you of your impact on wildlife and the surrounding ecosystem?",
+    "What is one habit wish you could break?",
+    "What is one habit wish you could form?",
     ""];
     var i = Math.floor(Math.random() * (questionDatabase.length-1));
 
@@ -82,10 +151,24 @@ class Questions extends Component {
     return(
      <View style = {styles.container}>
       <Text style = {styles.qstyle}>{questionDatabase[i]}</Text>
+
+      <TouchableOpacity style={styles.buttonQuestion} onPress={this.Responses} >
+        <Image
+        style={{width: 130, height: 130, right: 50, bottom: 100, position: 'absolute'}}
+        source={require("./assets/thoughtBubble.png")}/>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.buttonQuestion} onPress={this.Responses}>
+        <Image
+        style={{width: 135, height: 130, left: 50, bottom: 100, position: 'absolute'}}
+        source={require("./assets/pencilPaper.png")}/>
+      </TouchableOpacity>
+
       </View>
     );
   }
 }
+
 
 class SettingsPage extends Component {
   constructor(){
@@ -139,7 +222,8 @@ export default JarProject = StackNavigator(
     First: { screen: HomePage },
     Second: { screen: MyJar },
     Settings: { screen: SettingsPage },
-    Questions: { screen: Questions }
+    Questions: { screen: Questions },
+    Responses: { screen: Responses },
   }
 );
 
@@ -179,7 +263,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     textAlign: 'center',
     fontSize: 45,
-    paddingTop: 60
+    paddingTop: 60,
+    paddingLeft: 20,
+    paddingRight: 20,
   },
   date: {
     fontFamily: 'American Typewriter',
