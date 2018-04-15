@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
-import { AppRegistry, StyleSheet, Text ,View, TouchableOpacity, Button, Image, TextInput} from 'react-native';
+import { AppRegistry, StyleSheet, Text ,
+  View, Switch, TouchableOpacity, Button,
+   Image, TextInput, Alert} from 'react-native';
 import {List, ListItem} from 'react-native-elements';
 import {StackNavigator} from 'react-navigation';
 import {YellowBox} from 'react-native';
@@ -15,14 +17,7 @@ class HomePage extends Component {
   render()
   {
     return (
-      <View style={styles.container}>
-
-        <TouchableOpacity style={styles.button} onPress={()=>{alert("you clicked me")}}>
-          <Image 
-          style={{width: 267.75, height: 450}}
-          source={require("./assets/ThoughtJar.png")}/>
-        </TouchableOpacity>
-        <Text style = {styles.date}>April 14, 2018</Text>
+      <View style={styles.HomeContainer}>
          <Image
            style={{width: 119, height: 200}}
           source={require('./assets/ThoughtJar.png')}
@@ -41,13 +36,19 @@ class MyJar extends Component {
   };
   FunctionToOpenSecondActivity = () =>
   {
-    this.props.navigation.navigate("First");
+    this.props.navigation.navigate("Settings");
   }
   render()
   {
     return(
 
       <View style = {styles.container }>
+      <TouchableOpacity style={styles.button} onPress={()=>{alert("you clicked me")}}>
+        <Image
+        style={{width: 267.75, height: 450}}
+        source={require("./assets/ThoughtJar.png")}/>
+      </TouchableOpacity>
+        <Text style = {styles.date}>April 14, 2018</Text>
         <Text> This is the Jar Page </Text>
         <Button onPress = {this.FunctionToOpenSecondActivity} title = 'Click Here'/>
 
@@ -55,10 +56,58 @@ class MyJar extends Component {
     );
   }
 }
+class SettingsPage extends Component {
+  constructor(){
+    super();
+    this.state ={
+      SwitchOnValue : false
+    }
+  }
+  static navigationOptions =
+  {
+      title: "Settings",
+  };
+  ShowAlert = (value) =>{
+
+  this.setState({
+
+    SwitchOnValueHolder: value
+  })
+
+  if(value == true)
+  {
+
+    //Perform any task here which you want to execute on Switch ON event.
+    Alert.alert("You will recieve Daily Thoughts.");
+  }
+  else{
+    //Perform any task here which you want to execute on Switch OFF event.
+    Alert.alert("You not recieve Daily Thoughts.");
+  }
+
+}
+ render() {
+
+   return (
+
+     <View style={styles.container}>
+
+       <Text style ={{fontSize: 18}}>Settings</Text>
+
+        <Switch
+          onValueChange={(value) => this.ShowAlert(value)}
+          style={{marginBottom: 10}}
+          value={this.state.SwitchOnValueHolder} />
+
+     </View>
+   );
+ }
+}
 export default JarProject = StackNavigator(
 {
     First: { screen: HomePage },
-    Second: { screen: MyJar }
+    Second: { screen: MyJar },
+    Settings: { screen: SettingsPage}
   }
 );
 
@@ -70,6 +119,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingTop: 40,
   },
+  HomeContainer: {
+    flex: 1,
+    backgroundColor: '#EDEDD1',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   button: {
     backgroundColor: '#fff',
     borderRadius: 20,
@@ -79,6 +134,11 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 5 },
     shadowRadius: 10,
     shadowOpacity: 0,
+  },
+  welcome: {
+    fontSize: 25,
+    fontFamily: 'American Typewriter',
+    padding: 10,
   },
   date: {
     fontFamily: 'American Typewriter',
@@ -101,17 +161,3 @@ const styles = StyleSheet.create({
 //     );
 //   }
 // }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#EDEDD1',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-//   welcome: {
-//     fontSize: 25,
-//     fontFamily: 'American Typewriter',
-//     padding: 10,
-//   }
-// });
