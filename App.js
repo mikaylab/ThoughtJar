@@ -11,6 +11,10 @@ YellowBox.ignoreWarnings(['Warning: component']);
 
 //export default class App extends React.Component {
 class HomePage extends Component {
+  static navigationOptions =
+  {
+      title: "Home",
+  };
   OpenMyJar = () =>
   {
     this.props.navigation.navigate("Second");
@@ -25,7 +29,10 @@ class HomePage extends Component {
         />
 
         <Text style = {styles.welcome}>Thought Jar</Text>
-        <Button onPress = {this.OpenMyJar} title = "Go to My Jar" />
+        <Button onPress = {this.OpenMyJar}
+          title = "Go to My Jar"
+          color = "#0DAAFF"
+        />
       </View>
     );
   }
@@ -55,7 +62,13 @@ class MyJar extends Component {
     var now = moment();
     return(
 
-      <View style = {styles.container }>
+      <View style = {styles.jar_screen }>
+      <TouchableOpacity style={styles.button} onPress= {this.OpenSettings} >
+        <Image
+          style={{width: 32, height: 32, left: 327}}
+          source={require("./assets/settings_gear.png")}/>
+       </TouchableOpacity>
+       <View style = {styles.container}>
       <TouchableOpacity style={styles.button} onPress={this.JumpToQuestions} >
         <Image
         style={{width: 267.75, height: 450}}
@@ -86,6 +99,9 @@ render() {
     return (
       <View style={styles.container}>
         <Text style = {styles.date}>April 14, 2018</Text>
+<<<<<<< HEAD
+        </View>
+=======
 
         <TextInput
             style={{height: 50,
@@ -101,13 +117,21 @@ render() {
               };
             })}}
             />
+>>>>>>> 44b9dba0b0ce958f37f90839e9ba873680d74504
       </View>
     );
   }
 }
 
 class Questions extends Component {
-
+  JumpToMyJar = () =>
+  {
+    this.props.navigation.navigate("Second");
+  }
+  JumpToQuestions = () =>
+  {
+    this.props.navigation.navigate("Questions");
+  }
   render()
   {
     var questionDatabase = ["How will you conquer today?",
@@ -152,7 +176,23 @@ class Questions extends Component {
 
     return(
      <View style = {styles.container}>
+     <TouchableOpacity
+         style={styles.button}
+         onPress={this.JumpToQuestions}>
+         <Image
+         style={{width: 29.75, height: 50}}
+         source={require("./assets/ThoughtJar.png")}/>
+       </TouchableOpacity>
       <Text style = {styles.qstyle}>{questionDatabase[i]}</Text>
+<<<<<<< HEAD
+      <TouchableOpacity
+          style={styles.button}
+          onPress={this.JumpToMyJar}>
+          <Image
+          style={{width: 32, height: 32, bottom: 0}}
+          source={require("./assets/home_icon.png")}/>
+        </TouchableOpacity>
+=======
 
       <TouchableOpacity style={styles.buttonQuestion} onPress={this.Responses} >
         <Image
@@ -166,6 +206,7 @@ class Questions extends Component {
         source={require("./assets/pencilPaper.png")}/>
       </TouchableOpacity>
 
+>>>>>>> 44b9dba0b0ce958f37f90839e9ba873680d74504
       </View>
     );
   }
@@ -206,13 +247,11 @@ class SettingsPage extends Component {
 
    return (
 
-     <View style={styles.container}>
+     <View style={styles.HomeContainer}>
 
-       <Text style ={{fontSize: 18}}>Settings!!!</Text>
-
+       <Text style = {styles.welcome}>Do you want to get Daily Thoughts?</Text>
         <Switch
           onValueChange={(value) => this.ShowAlert(value)}
-          style= {{paddingBottom:50}}
           value={this.state.SwitchOnValueHolder} />
 
      </View>
@@ -235,11 +274,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingTop: 40,
   },
+   jar_screen: {
+     flex: 1,
+     backgroundColor: '#fff',
+   },
   HomeContainer: {
     flex: 1,
-    backgroundColor: '#EDEDD1',
+    backgroundColor: '#CCE3D2',
     alignItems: 'center',
     justifyContent: 'center',
   },
