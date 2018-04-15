@@ -58,7 +58,7 @@ class MyJar extends Component {
     );
   }
 }
-class Questions extends Component{
+class Questions extends Component {
 
   render()
   {
@@ -83,6 +83,7 @@ class Questions extends Component{
       </View>
     );
   }
+}
 
 class SettingsPage extends Component {
   constructor(){
@@ -176,7 +177,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 45,
     paddingTop: 60
-  }
+  },
   date: {
     fontFamily: 'American Typewriter',
     fontSize: 30,
