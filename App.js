@@ -10,6 +10,10 @@ YellowBox.ignoreWarnings(['Warning: component']);
 
 //export default class App extends React.Component {
 class HomePage extends Component {
+  static navigationOptions =
+  {
+      title: "Home",
+  };
   OpenMyJar = () =>
   {
     this.props.navigation.navigate("Second");
@@ -24,7 +28,10 @@ class HomePage extends Component {
         />
 
         <Text style = {styles.welcome}>Thought Jar</Text>
-        <Button onPress = {this.OpenMyJar} title = "Go to My Jar" />
+        <Button onPress = {this.OpenMyJar}
+          title = "Go to My Jar"
+          color = "#0DAAFF"
+        />
       </View>
     );
   }
@@ -65,7 +72,14 @@ class MyJar extends Component {
   }
 }
 class Questions extends Component {
-
+  JumpToMyJar = () =>
+  {
+    this.props.navigation.navigate("Second");
+  }
+  JumpToQuestions = () =>
+  {
+    this.props.navigation.navigate("Questions");
+  }
   render()
   {
     var questionDatabase = ["How will you conquer today?",
@@ -85,7 +99,21 @@ class Questions extends Component {
 
     return(
      <View style = {styles.container}>
+     <TouchableOpacity
+         style={styles.button}
+         onPress={this.JumpToQuestions}>
+         <Image
+         style={{width: 29.75, height: 50}}
+         source={require("./assets/ThoughtJar.png")}/>
+       </TouchableOpacity>
       <Text style = {styles.qstyle}>{questionDatabase[i]}</Text>
+      <TouchableOpacity
+          style={styles.button}
+          onPress={this.JumpToMyJar}>
+          <Image
+          style={{width: 32, height: 32, bottom: 0}}
+          source={require("./assets/home_icon.png")}/>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -125,13 +153,11 @@ class SettingsPage extends Component {
 
    return (
 
-     <View style={styles.jar_screen}>
+     <View style={styles.HomeContainer}>
 
-       <Text style ={{fontSize: 18}}>Settings!!!</Text>
-
+       <Text style = {styles.welcome}>Do you want to get Daily Thoughts?</Text>
         <Switch
           onValueChange={(value) => this.ShowAlert(value)}
-          style= {{paddingBottom:50}}
           value={this.state.SwitchOnValueHolder} />
 
      </View>
@@ -160,7 +186,7 @@ const styles = StyleSheet.create({
    },
   HomeContainer: {
     flex: 1,
-    backgroundColor: '#EDEDD1',
+    backgroundColor: '#CCE3D2',
     alignItems: 'center',
     justifyContent: 'center',
   },
