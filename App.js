@@ -1,29 +1,53 @@
-import React from 'react';
-import { StyleSheet, Text,View, FlatList} from 'react-native';
+import React, {Component} from 'react';
+import { AppRegistry, StyleSheet, Text ,View, FlatList, Button} from 'react-native';
 import {List, ListItem} from 'react-native-elements';
+import {StackNavigator} from 'react-navigation';
+import {YellowBox} from 'react-native';
+YellowBox.ignoreWarnings(['Warning: component']);
 
-export default class App extends React.Component {
-  render() {
-  const list_data = [
-          {title: "Jar 1", key: "Jar1"},
-          {title: "Jar 2", key: "Jar2"},
-          {title: "Jar 3", key: "Jar3"},
-        ];
+
+//export default class App extends React.Component {
+class HomePage extends Component {
+  OpenMyJar = () =>
+  {
+    this.props.navigation.navigate("Second");
+  }
+  render()
+  {
     return (
       <View style={styles.container}>
         <Text>Thought Jar</Text>
-        <List>
-          <FlatList
-            data = {list_data}
-            renderItem = {
-                ({item}) => <Text key={item.key}>{item.title}</Text>
-              }
-          />
-        </List>
+        <Button onPress = {this.OpenMyJar} title = "Go to My Jar" />
       </View>
     );
   }
 }
+class MyJar extends Component {
+  static navigationOptions =
+  {
+      title: "My Jar",
+  };
+  FunctionToOpenSecondActivity = () =>
+  {
+    this.props.navigation.navigate("First");
+  }
+  render()
+  {
+    return(
+
+      <View style = {styles.container }>
+        <Text> This is the Jar Page </Text>
+        <Button onPress = {this.FunctionToOpenSecondActivity} title = 'Click Here'/>
+      </View>
+    );
+  }
+}
+export default JarProject = StackNavigator(
+{
+    First: { screen: HomePage },
+    Second: { screen: MyJar }
+  }
+);
 
 const styles = StyleSheet.create({
   container: {
