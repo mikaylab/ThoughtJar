@@ -28,6 +28,8 @@ class HomePage extends Component {
       </View>
     );
   }
+   
+   
 }
 class MyJar extends Component {
   static navigationOptions =
@@ -56,6 +58,33 @@ class MyJar extends Component {
     );
   }
 }
+<<<<<<< HEAD
+class Questions extends Component{
+
+  render()
+  {
+    var questionDatabase = ["How will you conquer today?", 
+    "What can you accomplish in the next five minutes?", 
+    "Who's someone you haven't reached out to in a while?",
+    "What is one thing you do that makes you feel happy?",
+    "When's the last time you drank water?",
+    "When's the last time you took a walk?",
+    "Take an opportunity to sing your favorite song today!",
+    "How can you brighten someone's day today?",
+    "What's a skill you haven't used recently?", 
+    "Can you think of a time you overcame something stressful?", 
+    "What advice would you give your younger self?", 
+    ""];
+    var i = Math.floor(Math.random() * (questionDatabase.length-1));
+
+
+    return(
+     <View style = {styles.container}>
+      <Text style = {styles.qstyle}>{questionDatabase[i]}</Text>
+      </View>
+    );
+  }
+=======
 class SettingsPage extends Component {
   constructor(){
     super();
@@ -102,6 +131,7 @@ class SettingsPage extends Component {
      </View>
    );
  }
+>>>>>>> 1353fc65616b06c3ab4f84ea7dc74a87f3f56dcb
 }
 export default JarProject = StackNavigator(
 {
@@ -140,10 +170,22 @@ const styles = StyleSheet.create({
     fontFamily: 'American Typewriter',
     padding: 10,
   },
+<<<<<<< HEAD
+  qstyle: {
+    flex: 1,
+    justifyContent: 'center',
+    fontFamily: 'American Typewriter',
+    alignItems: 'center',
+    textAlign: 'center',
+    fontSize: 45,
+    paddingTop: 60
+  }
+=======
   date: {
     fontFamily: 'American Typewriter',
     fontSize: 30,
   },
+>>>>>>> 1353fc65616b06c3ab4f84ea7dc74a87f3f56dcb
 });
 
 //   render() {
