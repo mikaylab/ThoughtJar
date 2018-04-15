@@ -5,12 +5,15 @@ import { AppRegistry, StyleSheet, Text ,
 import {List, ListItem} from 'react-native-elements';
 import {StackNavigator} from 'react-navigation';
 import {YellowBox} from 'react-native';
-import Moment from 'moment';
 YellowBox.ignoreWarnings(['Warning: component']);
 
 
 //export default class App extends React.Component {
 class HomePage extends Component {
+  static navigationOptions =
+  {
+      title: "Home",
+  };
   OpenMyJar = () =>
   {
     this.props.navigation.navigate("Second");
@@ -25,7 +28,10 @@ class HomePage extends Component {
         />
 
         <Text style = {styles.welcome}>Thought Jar</Text>
-        <Button onPress = {this.OpenMyJar} title = "Go to My Jar" />
+        <Button onPress = {this.OpenMyJar}
+          title = "Go to My Jar"
+          color = "#0DAAFF"
+        />
       </View>
     );
   }
@@ -45,24 +51,46 @@ class MyJar extends Component {
   }
   render()
   {
-    var moment = require('moment');
-    var now = moment();
     return(
 
-      <View style = {styles.container }>
+      <View style = {styles.jar_screen }>
+      <TouchableOpacity style={styles.button} onPress= {this.OpenSettings} >
+        <Image
+          style={{width: 32, height: 32, left: 327}}
+          source={require("./assets/settings_gear.png")}/>
+       </TouchableOpacity>
+       <View style = {styles.container}>
       <TouchableOpacity style={styles.button} onPress={this.JumpToQuestions} >
         <Image
         style={{width: 267.75, height: 450}}
         source={require("./assets/ThoughtJar.png")}/>
       </TouchableOpacity>
-        <Text style = {styles.date}>{Moment(now).format('dddd, MMMM Do, YYYY')}</Text>
-        <Button onPress = {this.OpenSettings} title = 'Settings'/>
+        <Text style = {styles.date}>April 14, 2018</Text>
+        </View>
 
+        <TextInput
+            style={{height: 50,
+                    margin: 20,
+                    padding: 10,
+                    fontFamily: 'American Typewriter',
+                    fontSize: 25,
+            }}
+            placeholder="Enter your response"
+            onChangeText={(text) => {this.setState(() => {
+              return {
+                typedResponse: text
+              };
+            })}}
+            />
       </View>
     );
   }
 }
 class Questions extends Component {
+  Responses = () =>
+  {
+    this.props.navigation.navigate("Responses");
+  }
 
   render()
   {
@@ -83,7 +111,21 @@ class Questions extends Component {
 
     return(
      <View style = {styles.container}>
+     <TouchableOpacity
+         style={styles.button}
+         onPress={this.JumpToQuestions}>
+         <Image
+         style={{width: 29.75, height: 50}}
+         source={require("./assets/ThoughtJar.png")}/>
+       </TouchableOpacity>
       <Text style = {styles.qstyle}>{questionDatabase[i]}</Text>
+      <TouchableOpacity
+          style={styles.button}
+          onPress={this.JumpToMyJar}>
+          <Image
+          style={{width: 32, height: 32, bottom: 0}}
+          source={require("./assets/home_icon.png")}/>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -115,7 +157,7 @@ class SettingsPage extends Component {
   }
   else{
     //Perform any task here which you want to execute on Switch OFF event.
-    Alert.alert("You will not recieve Daily Thoughts.");
+    Alert.alert("You not recieve Daily Thoughts.");
   }
 
 }
@@ -123,13 +165,11 @@ class SettingsPage extends Component {
 
    return (
 
-     <View style={styles.container}>
+     <View style={styles.HomeContainer}>
 
-       <Text style ={{fontSize: 18}}>Settings!!!</Text>
-
+       <Text style = {styles.welcome}>Do you want to get Daily Thoughts?</Text>
         <Switch
           onValueChange={(value) => this.ShowAlert(value)}
-          style= {{paddingBottom:50}}
           value={this.state.SwitchOnValueHolder} />
 
      </View>
@@ -151,11 +191,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingTop: 40,
   },
+   jar_screen: {
+     flex: 1,
+     backgroundColor: '#fff',
+   },
   HomeContainer: {
     flex: 1,
-    backgroundColor: '#EDEDD1',
+    backgroundColor: '#CCE3D2',
     alignItems: 'center',
     justifyContent: 'center',
   },
