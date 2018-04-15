@@ -5,6 +5,7 @@ import { AppRegistry, StyleSheet, Text ,
 import {List, ListItem} from 'react-native-elements';
 import {StackNavigator} from 'react-navigation';
 import {YellowBox} from 'react-native';
+import Moment from 'moment';
 YellowBox.ignoreWarnings(['Warning: component']);
 
 
@@ -30,7 +31,7 @@ class HomePage extends Component {
         <Text style = {styles.welcome}>Thought Jar</Text>
         <Button onPress = {this.OpenMyJar}
           title = "Go to My Jar"
-          color = "#0DAAFF"
+          color = "#000000"
         />
       </View>
     );
@@ -51,6 +52,8 @@ class MyJar extends Component {
   }
   render()
   {
+    var moment = require('moment');
+    var now = moment();
     return(
 
       <View style = {styles.jar_screen }>
@@ -65,31 +68,24 @@ class MyJar extends Component {
         style={{width: 267.75, height: 450}}
         source={require("./assets/ThoughtJar.png")}/>
       </TouchableOpacity>
-        <Text style = {styles.date}>April 14, 2018</Text>
+        <Text style = {styles.date}>{Moment(now).format('dddd, MMMM Do, YYYY')}</Text>
         </View>
-
-        <TextInput
-            style={{height: 50,
-                    margin: 20,
-                    padding: 10,
-                    fontFamily: 'American Typewriter',
-                    fontSize: 25,
-            }}
-            placeholder="Enter your response"
-            onChangeText={(text) => {this.setState(() => {
-              return {
-                typedResponse: text
-              };
-            })}}
-            />
       </View>
     );
   }
 }
 class Questions extends Component {
+   static navigationOptions =
+  {
+      title: "Questions",
+  };
   Responses = () =>
   {
     this.props.navigation.navigate("Responses");
+  }
+  NewQuestion = () =>
+  {
+    this.forceUpdate();
   }
 
   render()
@@ -126,11 +122,56 @@ class Questions extends Component {
           style={{width: 32, height: 32, bottom: 0}}
           source={require("./assets/home_icon.png")}/>
         </TouchableOpacity>
+        <TouchableOpacity hitSlop={{top: 0, left: 0, bottom: 0, right: 0}} style={styles.buttonQuestion} onPress={this.NewQuestion} >
+        <Image
+        style={{width: 90, height: 150, right: 30, bottom: 100, position: 'absolute', zIndex: 1}}
+        source={require("./assets/ThoughtJar.png")}/>
+      </TouchableOpacity>
+
+      <TouchableOpacity hitSlop={{top: 0, left: 0, bottom: 0, right: 0}} style={styles.buttonQuestion} onPress={this.Responses}>
+        <Image
+        style={{width: 135, height: 130, left: 50, bottom: 100, position: 'absolute', zIndex: 1}}
+        source={require("./assets/pencilPaper.png")}/>
+      </TouchableOpacity>
       </View>
     );
   }
 }
+class Responses extends Component {
+  
+  constructor(props) {
+    super(props);
+    this.state = {
+      text: ""
+    }
+  }
 
+  static navigationOptions =
+  {
+      title: "Responses",
+  };
+
+  handleChangeText = (typedText) => {
+    this.setState({text: typedText});
+  }
+
+  render() {
+    return (
+      <View style = {styles.container }>
+        <TextInput multiline
+            style={styles.responsesInput}
+            placeholder="Enter your response"
+            onChangeText={(text) => {this.setState(() => {
+              return {
+                typedResponse: text
+              };
+            })}
+          }
+        />
+      </View>
+    );
+  }
+}
 class SettingsPage extends Component {
   constructor(){
     super();
@@ -138,30 +179,32 @@ class SettingsPage extends Component {
       SwitchOnValue : false
     }
   }
+
   static navigationOptions =
   {
       title: "Settings",
   };
-  ShowAlert = (value) =>{
 
-  this.setState({
-
-    SwitchOnValueHolder: value
-  })
-
-  if(value == true)
+  ShowAlert = (value) =>
   {
+    this.setState({
 
-    //Perform any task here which you want to execute on Switch ON event.
-    Alert.alert("You will recieve Daily Thoughts.");
-  }
-  else{
-    //Perform any task here which you want to execute on Switch OFF event.
-    Alert.alert("You not recieve Daily Thoughts.");
+      SwitchOnValueHolder: value
+    })
+
+    if(value == true)
+    {
+
+      //Perform any task here which you want to execute on Switch ON event.
+      Alert.alert("You will recieve Daily Thoughts.");
+    }
+    else{
+      //Perform any task here which you want to execute on Switch OFF event.
+      Alert.alert("You not recieve Daily Thoughts.");
+    }
   }
 
-}
- render() {
+  render() {
 
    return (
 
@@ -181,7 +224,8 @@ export default JarProject = StackNavigator(
     First: { screen: HomePage },
     Second: { screen: MyJar },
     Settings: { screen: SettingsPage },
-    Questions: { screen: Questions }
+    Questions: { screen: Questions },
+    Responses: { screen: Responses }
   }
 );
 
@@ -223,12 +267,20 @@ const styles = StyleSheet.create({
     fontFamily: 'American Typewriter',
     alignItems: 'center',
     textAlign: 'center',
-    fontSize: 45,
-    paddingTop: 60
+    fontSize: 35,
+    paddingTop: 30
   },
   date: {
     fontFamily: 'American Typewriter',
     fontSize: 30,
   },
+    responsesInput: {
+    flex: 1,
+    height: 200,
+    margin: 20,
+    padding: 10,
+    fontFamily: 'American Typewriter',
+    fontSize: 25
+  }
 
 });
