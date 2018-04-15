@@ -5,6 +5,7 @@ import { AppRegistry, StyleSheet, Text ,
 import {List, ListItem} from 'react-native-elements';
 import {StackNavigator} from 'react-navigation';
 import {YellowBox} from 'react-native';
+import Moment from 'moment';
 YellowBox.ignoreWarnings(['Warning: component']);
 
 
@@ -50,6 +51,8 @@ class MyJar extends Component {
 
   render()
   {
+    var moment = require('moment');
+    var now = moment();
     return(
 
       <View style = {styles.container }>
@@ -58,9 +61,8 @@ class MyJar extends Component {
         style={{width: 267.75, height: 450}}
         source={require("./assets/ThoughtJar.png")}/>
       </TouchableOpacity>
-        <Text style = {styles.date}>April 14, 2018</Text>
-        <Text> This is the Jar Page </Text>
-        <Button onPress = {this.OpenSettings} title = 'Click Here'/>
+        <Text style = {styles.date}>{Moment(now).format('dddd, MMMM Do, YYYY')}</Text>
+        <Button onPress = {this.OpenSettings} title = 'Settings'/>
 
       </View>
     );
@@ -196,7 +198,7 @@ class SettingsPage extends Component {
   }
   else{
     //Perform any task here which you want to execute on Switch OFF event.
-    Alert.alert("You not recieve Daily Thoughts.");
+    Alert.alert("You will not recieve Daily Thoughts.");
   }
 
 }
