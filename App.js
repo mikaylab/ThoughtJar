@@ -1,62 +1,66 @@
-import React from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput } from 'react-native';
+import React, {Component} from 'react';
+import { AppRegistry, StyleSheet, Text ,View, TouchableOpacity, Button, Image, TextInput} from 'react-native';
+import {List, ListItem} from 'react-native-elements';
+import {StackNavigator} from 'react-navigation';
+import {YellowBox} from 'react-native';
+YellowBox.ignoreWarnings(['Warning: component']);
 
-export default class App extends React.Component {
-  
-// componentWillMount ()
-// {
-//   setTimeout(()=>{
-//     this.navigate('Main');
-//   },70000)
-// }
-constructor(props) {
-  super(props);
-  this.state = {
-    text: ""
+
+//export default class App extends React.Component {
+class HomePage extends Component {
+  OpenMyJar = () =>
+  {
+    this.props.navigation.navigate("Second");
   }
-}
-
-handleChangeText = (typedText) => {
-  this.setState({text: typedText});
-}
-
-  render() {
+  render()
+  {
     return (
       <View style={styles.container}>
+
         <TouchableOpacity style={styles.button} onPress={()=>{alert("you clicked me")}}>
           <Image 
           style={{width: 267.75, height: 450}}
           source={require("./assets/ThoughtJar.png")}/>
         </TouchableOpacity>
         <Text style = {styles.date}>April 14, 2018</Text>
-        <TextInput
-          style={
-            {
-              height: 50
-            }
-          }
-          placeholder="Type your text here"
-          OnChangeText={
-            (typedText) => {
-              this.setState({typedText});
-            }
-          }
-          value={this.state.text}
-          />
-        <Text
-          style={
-            {
-              padding: 20,
-              fontSize: 30,
-            }
-          }>
-          You type: {this.state.text}
-          <\text>
-          <StatusBar hidden={true}/>
+         <Image
+           style={{width: 119, height: 200}}
+          source={require('./assets/ThoughtJar.png')}
+        />
+
+        <Text style = {styles.welcome}>Thought Jar</Text>
+        <Button onPress = {this.OpenMyJar} title = "Go to My Jar" />
       </View>
     );
   }
 }
+class MyJar extends Component {
+  static navigationOptions =
+  {
+      title: "My Jar",
+  };
+  FunctionToOpenSecondActivity = () =>
+  {
+    this.props.navigation.navigate("First");
+  }
+  render()
+  {
+    return(
+
+      <View style = {styles.container }>
+        <Text> This is the Jar Page </Text>
+        <Button onPress = {this.FunctionToOpenSecondActivity} title = 'Click Here'/>
+
+      </View>
+    );
+  }
+}
+export default JarProject = StackNavigator(
+{
+    First: { screen: HomePage },
+    Second: { screen: MyJar }
+  }
+);
 
 const styles = StyleSheet.create({
   container: {
@@ -64,6 +68,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    paddingTop: 40,
   },
   button: {
     backgroundColor: '#fff',
