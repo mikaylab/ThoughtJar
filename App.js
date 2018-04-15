@@ -183,19 +183,3 @@ const styles = StyleSheet.create({
   },
 
 });
-
-//   render() {
-//     return (
-//       <View style={styles.container}>
-
-//          <Image
-//            style={{width: 119, height: 200}}
-//           source={require('./assets/ThoughtJar.png')}
-//         />
-
-//         <Text style = {styles.welcome}>Thought Jar</Text>
-
-//       </View>
-//     );
-//   }
-// }
