@@ -1,11 +1,19 @@
 import React, {Component} from 'react';
-import { AppRegistry, StyleSheet, Text ,
-  View, Switch, TouchableOpacity, Button,
-   Image, TextInput, Alert} from 'react-native';
+import { AppRegistry,
+        StyleSheet,
+        Text ,
+        View,
+        Switch,
+        TouchableOpacity,
+        Button,
+        Image,
+        TextInput,
+        Alert} from 'react-native';
 import {List, ListItem} from 'react-native-elements';
 import {StackNavigator} from 'react-navigation';
 import {YellowBox} from 'react-native';
 import Moment from 'moment';
+import { Navigation } from 'react-native-navigation';
 YellowBox.ignoreWarnings(['Warning: component']);
 
 
@@ -19,11 +27,10 @@ class HomePage extends Component {
   {
     return (
       <View style={styles.HomeContainer}>
-         <Image
+        <Image
            style={{width: 119, height: 200}}
-          source={require('./assets/ThoughtJar.png')}
+           source={require('./assets/ThoughtJar.png')}
         />
-
         <Text style = {styles.welcome}>Thought Jar</Text>
         <Button onPress = {this.OpenMyJar}
           title = "Go to My Jar"
@@ -42,6 +49,7 @@ class MyJar extends Component {
           style={{width: 32, height: 32}}
         />
       ),
+      headerLeft: null,
   };
   OpenSettings = () =>
   {
@@ -80,10 +88,6 @@ class Questions extends Component {
   {
     this.props.navigation.goBack(null);
   }
-  OpenMyJar = () =>
-  {
-    this.props.navigation.navigate("Second");
-  }
   Responses = () =>
   {
     this.props.navigation.navigate("Responses");
@@ -121,13 +125,13 @@ class Questions extends Component {
         </TouchableOpacity>
         <TouchableOpacity hitSlop={{top: 0, left: 0, bottom: 0, right: 0}} style={styles.buttonQuestion} onPress={this.NewQuestion} >
         <Image
-        style={{width: 90, height: 150, right: 30, bottom: 100, position: 'absolute', zIndex: 1}}
+        style={{width: 90, height: 150, right: 50, bottom: 100, position: 'absolute', zIndex: 1}}
         source={require("./assets/ThoughtJar.png")}/>
       </TouchableOpacity>
 
       <TouchableOpacity hitSlop={{top: 0, left: 0, bottom: 0, right: 0}} style={styles.buttonQuestion} onPress={this.Responses}>
         <Image
-        style={{width: 135, height: 130, left: 50, bottom: 100, position: 'absolute', zIndex: 1}}
+        style={{width: 135, height: 130, left: 20, bottom: 100, position: 'absolute', zIndex: 1}}
         source={require("./assets/pencilPaper.png")}/>
       </TouchableOpacity>
       </View>
@@ -135,7 +139,10 @@ class Questions extends Component {
   }
 }
 class Responses extends Component {
-
+  GoBack = () =>
+  {
+    setTimeout(this.props.navigation.goBack, 0);
+  }
   constructor(props) {
     super(props);
     this.state = {
@@ -146,6 +153,7 @@ class Responses extends Component {
   static navigationOptions =
   {
       title: "Responses",
+      headerLeft: null
   };
 
   handleChangeText = (typedText) => {
@@ -155,6 +163,12 @@ class Responses extends Component {
   render() {
     return (
       <View style = {styles.container }>
+      <TouchableOpacity
+        onPress={this.GoBack} >
+          <Image
+          style={{width: 32, height: 32, left: 155}}
+          source={require("./assets/check_icon.png")}/>
+      </TouchableOpacity>
         <TextInput multiline
             style={styles.responsesInput}
             placeholder="Enter your response"
@@ -170,7 +184,7 @@ class Responses extends Component {
   }
 }
 class SettingsPage extends Component {
-  constructor(){
+  constructor() {
     super();
     this.state ={
       SwitchOnValue : false
@@ -199,14 +213,13 @@ class SettingsPage extends Component {
     //Perform any task here which you want to execute on Switch OFF event.
     Alert.alert("You will not recieve Daily Thoughts.");
   }
-
+}
   render() {
-
    return (
 
      <View style={styles.HomeContainer}>
 
-       <Text style = {styles.welcome}>Do you want to get Daily Thoughts?</Text>
+       <Text style = {styles.welcome}>Do you want to recieve Daily Thoughts?</Text>
         <Switch
           onValueChange={(value) => this.ShowAlert(value)}
           value={this.state.SwitchOnValueHolder} />
@@ -215,6 +228,7 @@ class SettingsPage extends Component {
    );
  }
 }
+
 export default JarProject = StackNavigator(
 {
     First: { screen: HomePage },
@@ -228,13 +242,13 @@ export default JarProject = StackNavigator(
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#CCE3D2',
     alignItems: 'center',
     justifyContent: 'center',
   },
    jar_screen: {
      flex: 1,
-     backgroundColor: '#fff',
+     backgroundColor: '#CCE3D2',
    },
   HomeContainer: {
     flex: 1,
@@ -243,7 +257,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   button: {
-    backgroundColor: '#fff',
+    backgroundColor: '#CCE3D2',
     borderRadius: 20,
     padding: 10,
     marginBottom: 20,
@@ -268,7 +282,7 @@ const styles = StyleSheet.create({
   },
   date: {
     fontFamily: 'American Typewriter',
-    fontSize: 30,
+    fontSize: 25,
   },
     responsesInput: {
     flex: 1,
