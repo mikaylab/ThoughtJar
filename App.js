@@ -1,14 +1,5 @@
 import React, {Component} from 'react';
-import { AppRegistry,
-        StyleSheet,
-        Text ,
-        View,
-        Switch,
-        TouchableOpacity,
-        Button,
-        Image,
-        TextInput,
-        Alert} from 'react-native';
+import {AppRegistry, StyleSheet, Text, View, Switch, TouchableOpacity, Button, Image, TextInput, Alert} from 'react-native';
 import {List, ListItem} from 'react-native-elements';
 import {StackNavigator} from 'react-navigation';
 import {YellowBox} from 'react-native';
@@ -19,6 +10,12 @@ YellowBox.ignoreWarnings(['Warning: component']);
 
 //export default class App extends React.Component {
 class HomePage extends Component {
+    static navigationOptions =
+  {
+      title: "HomePage",
+      // headerLeft: null
+      header: null
+  };
   OpenMyJar = () =>
   {
     this.props.navigation.navigate("Second");
@@ -68,7 +65,7 @@ class MyJar extends Component {
       <View style = {styles.jar_screen }>
       <TouchableOpacity style={styles.button} onPress= {this.OpenSettings} >
         <Image
-          style={{width: 32, height: 32, left: 327}}
+          style={{width: 32, height: 32, left: 312, top: 5}}
           source={require("./assets/settings_gear.png")}/>
        </TouchableOpacity>
        <View style = {styles.container}>
@@ -77,13 +74,19 @@ class MyJar extends Component {
         style={{width: 267.75, height: 450}}
         source={require("./assets/ThoughtJar.png")}/>
       </TouchableOpacity>
-        <Text style = {styles.date}>{Moment(now).format('dddd, MMMM Do, YYYY')}</Text>
+        <Text style = {styles.date}>{Moment(now).format('dddd, MMMM Do')}</Text>
         </View>
       </View>
     );
   }
 }
 class Questions extends Component {
+ static navigationOptions =
+  {
+      title: "Questions",
+      // headerLeft: null
+      header: null
+  };
   GoBack = () =>
   {
     this.props.navigation.goBack(null);
@@ -110,7 +113,14 @@ class Questions extends Component {
     "What's a skill you haven't used recently?",
     "Can you think of a time you overcame something stressful?",
     "What advice would you give your younger self?",
-    ""];
+    "What are and how do we fix the effects of material and noise pollution on marine life?",
+    "Are there libraries but for new technology for free public access and should that exist?",
+    "How do you engage with your community?",
+    "How does your place of work or study promote cultural diversity and inclusivity?",
+    "What does quality education mean to you?",
+    "Do popular product or service ads perpetuate stereotypes?",
+    "Are all stereotypes inherently negative?",
+    "Can you identify any internal biases that you would like to change?"];
     var i = Math.floor(Math.random() * (questionDatabase.length-1));
 
     return(
@@ -190,10 +200,16 @@ class SettingsPage extends Component {
       SwitchOnValue : false
     }
   }
+    GoBack = () =>
+  {
+    this.props.navigation.goBack(null);
+  }
 
   static navigationOptions =
   {
       title: "Settings",
+      // headerLeft: null
+      header: null
   };
 
   ShowAlert = (value) =>
@@ -207,22 +223,31 @@ class SettingsPage extends Component {
     {
 
     //Perform any task here which you want to execute on Switch ON event.
-    Alert.alert("You will recieve Daily Thoughts.");
+    Alert.alert("You will receive Daily Thoughts.");
   }
   else{
     //Perform any task here which you want to execute on Switch OFF event.
-    Alert.alert("You will not recieve Daily Thoughts.");
+    Alert.alert("You will not receive Daily Thoughts.");
   }
 }
   render() {
    return (
 
-     <View style={styles.HomeContainer}>
+     <View style={styles.SettingsContainer}>
+       <TouchableOpacity
+          style={styles.button}
+          onPress={this.GoBack}>
+          <Image
+          style={{width: 32, height: 32, left: 302, top: 5, flex: 0}}
+          // style = {{width: 32, height: 32, padding: 25, top: 25}}
+          source={require("./assets/home_icon.png")}/>
+        </TouchableOpacity>
 
        <Text style = {styles.welcome}>Do you want to recieve Daily Thoughts?</Text>
         <Switch
           onValueChange={(value) => this.ShowAlert(value)}
           value={this.state.SwitchOnValueHolder} />
+        </View>
 
      </View>
    );
@@ -256,6 +281,24 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  SettingsContainer: {
+    flex: 1,
+    backgroundColor: '#EEECFF',
+    // alignItems: 'center',
+    // justifyContent: 'center',
+  },
+  InnerSettingsContainer: {
+    flex: 1,
+    backgroundColor: '#EEECFF',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  ResponseContainer: {
+    flex: 1,
+    backgroundColor: '#FFFFCC',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   button: {
     backgroundColor: '#CCE3D2',
     borderRadius: 20,
@@ -270,6 +313,7 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontFamily: 'American Typewriter',
     padding: 10,
+    paddingBottom: 140
   },
   qstyle: {
     flex: 1,
@@ -278,7 +322,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     textAlign: 'center',
     fontSize: 35,
-    paddingTop: 30
+    paddingTop: 70
   },
   date: {
     fontFamily: 'American Typewriter',
